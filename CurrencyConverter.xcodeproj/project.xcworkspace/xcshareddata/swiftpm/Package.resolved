@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FoundationLib",
+        "repositoryURL": "https://github.com/loniqin/swift-foundation-lib",
+        "state": {
+          "branch": "master",
+          "revision": "3de3cf180ecbfb036c802266bc046f52f415a21b",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
