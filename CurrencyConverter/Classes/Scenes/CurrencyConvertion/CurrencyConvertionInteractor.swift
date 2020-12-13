@@ -16,7 +16,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     weak var presenter: CurrencyConvertionPresentationLogic?
     
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest) {
-        
+        presenter?.presentSetupView(response: .init())
     }
     
 }

@@ -12,14 +12,12 @@ protocol CurrencyConvertionPresentationLogic: AnyObject {
 
 class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
 
-    
-    
     weak var viewController: CurrencyConvertionDisplayLogic?
     
     weak var router: CurrencyConvertionRoutingLogic?
     
     func presentSetupView(response: CurrencyConvertion.SetupViewResponse) {
-        
+        viewController?.displaySetupView(viewModel: .init())
     }
     
 }

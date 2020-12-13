@@ -126,8 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				F04BD8132585FCC40042819A /* Classes */,
-				F04BD7E92583CD750042819A /* App */,
-				F04BD7E52583CD530042819A /* Scenes */,
 				F04BD7B82583CA1E0042819A /* Main.storyboard */,
 				F04BD7BB2583CA1F0042819A /* Assets.xcassets */,
 				F04BD7BD2583CA1F0042819A /* LaunchScreen.storyboard */,
@@ -188,6 +186,8 @@
 		F04BD8132585FCC40042819A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F04BD7E52583CD530042819A /* Scenes */,
+				F04BD7E92583CD750042819A /* App */,
 				F04BD83D25864BB90042819A /* Extensions */,
 				F04BD834258647410042819A /* Errors */,
 				F04BD8152585FD110042819A /* Repositories */,

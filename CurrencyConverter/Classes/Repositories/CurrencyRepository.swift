@@ -52,7 +52,6 @@ class CurrencyRepository {
         request: RequestConvertable,
         completion: @escaping (Result<[String: Any], NetworkingError>) -> Void
     ) -> URLSessionTaskProtocol? {
-        
         httpClient.send(request) { (result: Result<[String: Any], Error>) in
             do {
                 let dictionary = try result.get()
