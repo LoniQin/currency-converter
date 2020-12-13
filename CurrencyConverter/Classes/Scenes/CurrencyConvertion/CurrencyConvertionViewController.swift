@@ -35,7 +35,10 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     }
     
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel) {
-        
+        title = viewModel.title
+        currencyLabel.isHidden = true
+        chevronImageView.isHidden = true
+        tableView.isHidden = true
     }
     
 }

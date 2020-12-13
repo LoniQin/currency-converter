@@ -10,11 +10,28 @@ enum CurrencyConvertion {
     // Set up view
     struct SetupViewRequest {}
     struct SetupViewResponse {}
-    struct SetupViewViewModel {}
+    struct SetupViewViewModel {
+        let title: String
+    }
+    
+    // Currency List
+    struct CurrencyListRequest {
+        
+    }
+    struct CurrencyListResponse {
+        let currencyList: CurrencyList
+    }
+    struct CurrencyListViewModel {
+        
+    }
+    
     // Update amount
     struct UpdateAmountRequest {}
     struct UpdateAmountResponse {}
     struct UpdateAmountViewModel {}
-    // Get Currency List
+    
+    // Choose Currency
+    
+    // Get Exchange rates
     
 }

@@ -11,13 +11,23 @@ protocol CurrencyConvertionPresentationLogic: AnyObject {
 }
 
 class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
+    
+    let configuration: CurrencyConvertionConfiguration
+    
+    init(configuration: CurrencyConvertionConfiguration) {
+        self.configuration = configuration
+    }
 
     weak var viewController: CurrencyConvertionDisplayLogic?
     
     weak var router: CurrencyConvertionRoutingLogic?
     
     func presentSetupView(response: CurrencyConvertion.SetupViewResponse) {
-        viewController?.displaySetupView(viewModel: .init())
+        viewController?.displaySetupView(
+            viewModel: .init(
+                title: configuration.stringProvider.currencyConvertionTitle()
+            )
+        )
     }
     
 }
