@@ -34,6 +34,8 @@
 		F04BD87825867C7A0042819A /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD87725867C7A0042819A /* LocalizationKey.swift */; };
 		F04BD883258681540042819A /* StringProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD882258681540042819A /* StringProvidable.swift */; };
 		F04BD888258718B90042819A /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD887258718B90042819A /* Amount.swift */; };
+		F04BD89C258755A00042819A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD89B258755A00042819A /* StringExtensions.swift */; };
+		F04BD8A1258755CD0042819A /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8A0258755CD0042819A /* DoubleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		F04BD87725867C7A0042819A /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
 		F04BD882258681540042819A /* StringProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProvidable.swift; sourceTree = "<group>"; };
 		F04BD887258718B90042819A /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
+		F04BD89B258755A00042819A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		F04BD8A0258755CD0042819A /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				F04BD83E25864BD00042819A /* DictionayExtensions.swift */,
+				F04BD89B258755A00042819A /* StringExtensions.swift */,
+				F04BD8A0258755CD0042819A /* DoubleExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				F04BD84725864D440042819A /* NetworkingError.swift in Sources */,
 				F04BD7EC2583CDBC0042819A /* CurrencyConvertionViewController.swift in Sources */,
 				F04BD80F2585FC450042819A /* CurrencyConvertionRouter.swift in Sources */,
+				F04BD89C258755A00042819A /* StringExtensions.swift in Sources */,
 				F04BD85125864EF30042819A /* Currency.swift in Sources */,
 				F04BD868258675FA0042819A /* Quote.swift in Sources */,
 				F04BD8172585FEB50042819A /* CurrencyRepository.swift in Sources */,
@@ -406,6 +413,7 @@
 				F04BD7FE2583CE840042819A /* CurrencyConvertionModels.swift in Sources */,
 				F04BD830258645FC0042819A /* CurrencyList.swift in Sources */,
 				F04BD87825867C7A0042819A /* LocalizationKey.swift in Sources */,
+				F04BD8A1258755CD0042819A /* DoubleExtension.swift in Sources */,
 				F04BD883258681540042819A /* StringProvidable.swift in Sources */,
 				F04BD7F42583CE010042819A /* CurrencyConvertionInteractor.swift in Sources */,
 				F04BD888258718B90042819A /* Amount.swift in Sources */,

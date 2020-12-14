@@ -13,11 +13,19 @@ protocol CurrencyConvertionBusinessLogic: AnyObject {
     
     func requestLoading(request: CurrencyConvertion.LoadingRequest)
     
+    func updateAmount(request: CurrencyConvertion.UpdateAmountRequest)
+    
     func updateCurrency(request: CurrencyConvertion.UpdateCurrencyRequest)
+    
+    func requestExchangeRates(request: CurrencyConvertion.ExchangeRatesRequest)
     
 }
 
 class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
+    
+    struct Constants {
+        static let defaultAmount = "1.0"
+    }
     
     var presenter: CurrencyConvertionPresentationLogic?
     
@@ -29,7 +37,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     
     var selectedIndex = 0
     
-    var amount = "1.0"
+    var amount = Constants.defaultAmount
     
     var quoteList: QuoteList?
     
@@ -52,7 +60,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
                     )
                 )
                 self.presenter?.presentAmount(response: .init(amount: self.amount))
-                self.calculateExchangeRates()
+                self.requestExchangeRates(request: .init())
             }
         }
     }
@@ -102,7 +110,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         }
     }
     
-    func calculateExchangeRates() {
+    func requestExchangeRates(request: CurrencyConvertion.ExchangeRatesRequest) {
         guard let currencyList = currencyList, let quoteList = quoteList, let amount = Double(amount) else {
             return
         }
@@ -120,6 +128,13 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         presenter?.presentExchangeRates(response: .init(exchangeRates: exchangeRates))
     }
     
+    func updateAmount(request: CurrencyConvertion.UpdateAmountRequest) {
+        if Double(request.amount) != nil || request.amount.isEmpty {
+            self.amount = request.amount
+        }
+        self.presenter?.presentAmount(response: .init(amount: self.amount))
+    }
+    
     func updateCurrency(request: CurrencyConvertion.UpdateCurrencyRequest) {
         selectedIndex = request.selectedIndex
         requestLoading(request: .init(loading: true))
@@ -131,7 +146,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
                         currency: currency.currencies[self.selectedIndex]
                     )
                 )
-                self.calculateExchangeRates()
+                self.requestExchangeRates(request: .init())
             }
         }
     }

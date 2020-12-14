@@ -65,7 +65,7 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
     }
     
     func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse) {
-        let currencies = response.currencyList.currencies.map { "\($0.name)(\($0.detail))" }
+        let currencies = response.currencyList.currencies.map { $0.name }
         viewController?.displayCurrencyList(
             viewModel: .init(
                 currencies: currencies

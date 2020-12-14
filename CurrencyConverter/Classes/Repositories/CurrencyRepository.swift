@@ -15,6 +15,14 @@ protocol CurrencyRepositoryProtocol {
 }
 class CurrencyRepository: CurrencyRepositoryProtocol {
     
+    struct Constants {
+        
+        static let currencyListKey = "currencyListKey"
+        
+        static let quoteListKey = "quoteListKey"
+        
+    }
+    
     let httpClient: Networking
     
     let storage: DataStorage
@@ -33,8 +41,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
     }
     
     func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>)->Void) {
-        let key = "currency_list"
-        if let currencyList: CurrencyList = try? storage.get(key) {
+        if let currencyList: CurrencyList = try? storage.get(Constants.currencyListKey) {
             completion(.success(currencyList))
             return
         }
@@ -50,7 +57,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
                 do {
                     let currencies: [String: String] = try diciontary.get("currencies")
                     let currencyList = CurrencyList(currencies)
-                    try self?.storage.set(currencyList, for: key)
+                    try self?.storage.set(currencyList, for: Constants.currencyListKey)
                     try self?.storage.save()
                     completion(.success(currencyList))
                 } catch let error {
@@ -63,8 +70,9 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
     }
     
     func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>)->Void) {
-        let key = "exchange_rates"
-        if let quoteList: QuoteList = try? storage.get(key), Date().timeIntervalSince(quoteList.created) < 30 * 60 {
+        if
+            let quoteList: QuoteList = try? storage.get(Constants.quoteListKey),
+            Date().timeIntervalSince(quoteList.created) < 30.minute {
             completion(.success(quoteList))
             return
         }
@@ -81,7 +89,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
                     let source: String = try diciontary.get("source")
                     let quotes: [String: Double] = try diciontary.get("quotes")
                     let quoteList = QuoteList(quotes, source: source)
-                    try self?.storage.set(quoteList, for: key)
+                    try self?.storage.set(quoteList, for: Constants.quoteListKey)
                     try self?.storage.save()
                     completion(.success(quoteList))
                 } catch let error {

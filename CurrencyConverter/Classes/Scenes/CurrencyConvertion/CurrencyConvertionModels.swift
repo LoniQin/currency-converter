@@ -37,7 +37,11 @@ enum CurrencyConvertion {
     }
     
     // Update amount
-    struct UpdateAmountRequest {}
+    struct UpdateAmountRequest {
+        
+        let amount: String
+        
+    }
     
     struct UpdateAmountResponse {
         

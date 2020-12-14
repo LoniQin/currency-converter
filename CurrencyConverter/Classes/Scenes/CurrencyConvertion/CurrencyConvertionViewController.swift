@@ -79,6 +79,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         pickerView.backgroundColor = UIColor.systemBackground
         amountField.placeholder = viewModel.amountHint
         amountField.keyboardType = .decimalPad
+        amountField.delegate = self
         indicator.hidesWhenStopped = true
         tableView.tableFooterView = UIView()
         tableView.delegate = self
@@ -88,10 +89,17 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
             UITableViewCell.self,
             forCellReuseIdentifier: Constants.reuseIdentifier
         )
+        amountField.addTarget(self, action: #selector(updateAmount(textField:)), for: .allEditingEvents)
         currencyStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseCurrency)))
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismisKeyboard)))
     }
-
+    @objc func updateAmount(textField: UITextField) {
+        interactor?.updateAmount(
+            request: .init(
+                amount: textField.text.unwrapped
+            )
+        )
+    }
     
     @objc func dismisKeyboard() {
         amountField.resignFirstResponder()
@@ -168,5 +176,12 @@ extension CurrencyConvertionViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         exchangeRatesViewModel.items.count
+    }
+}
+
+extension CurrencyConvertionViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        interactor?.requestExchangeRates(request: .init())
     }
 }
