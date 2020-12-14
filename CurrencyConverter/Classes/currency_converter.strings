@@ -6,7 +6,7 @@
   
 */
 "network_error" = "Network error";
-"c" = "Retry";
+"retry" = "Retry";
 "cancel" = "Cancel";
 "currency_convertion_title" = "Currency Converter";
 "currency_convertion_input_amount_hint" = "Please input amount...";

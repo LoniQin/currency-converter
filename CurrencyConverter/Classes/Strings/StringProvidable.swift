@@ -39,6 +39,6 @@ struct StringProvider: StringProvidable {
     }
     
     func currencyConvertionInputAmountHint() -> String {
-        LocalizationKey.currencyConvertionTitle.localizedString()
+        LocalizationKey.currencyConvertionInputAmountHint.localizedString()
     }
 }
