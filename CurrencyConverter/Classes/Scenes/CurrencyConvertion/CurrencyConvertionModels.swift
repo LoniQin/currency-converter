@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum CurrencyConvertion {
     // Set up view
     struct SetupViewRequest {}
@@ -25,32 +26,64 @@ enum CurrencyConvertion {
     
     struct CurrencyListResponse {
         
-        let selectedIndex: Int
-        
         let currencyList: CurrencyList
         
     }
     
     struct CurrencyListViewModel {
         
-        let selectedIndex: Int
-        
         let currencies: [String]
-        
-        let currentCurrencyName: String
         
     }
     
     // Update amount
     struct UpdateAmountRequest {}
     
-    struct UpdateAmountResponse {}
+    struct UpdateAmountResponse {
+        
+        let amount: String
+        
+    }
     
-    struct UpdateAmountViewModel {}
+    struct UpdateAmountViewModel {
+        
+        let amount: String
+        
+    }
     
-    // Choose Currency
+    // Update Currency
+    struct UpdateCurrencyRequest {
+        
+        let selectedIndex: Int
+        
+    }
+    struct UpdateCurrencyResponse {
+        
+        let selectedIndex: Int
+        
+        let currency: Currency
+        
+    }
+    struct UpdateCurrencyViewModel {
+        
+        let selectedIndex: Int
+        let currentCurrencyName: String
+    }
     
     // Get Exchange rates
+    struct ExchangeRatesRequest {
+        
+    }
+    struct ExchangeRatesResponse {
+        
+        var exchangeRates: [ExchangeRate]
+        
+    }
+    struct ExchangeRatesViewModel {
+        
+        var items: [String]
+        
+    }
     
     // Loading
     struct LoadingRequest {

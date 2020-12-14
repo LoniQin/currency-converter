@@ -29,9 +29,6 @@
                                 <rect key="frame" x="330.5" y="120" width="67.5" height="20.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="1jl-Rl-8c2" appends="YES" id="6fC-lV-LOg"/>
-                                </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oEj-T9-NFd">
                                 <rect key="frame" x="330.5" y="120" width="67.5" height="20.5"/>
@@ -85,17 +82,14 @@
                         <outlet property="amountField" destination="aNo-nQ-hfi" id="PIf-Hs-Z5f"/>
                         <outlet property="chevronImageView" destination="FHy-EZ-u3R" id="EUe-WJ-CLp"/>
                         <outlet property="currencyLabel" destination="tdX-Yx-pE0" id="UmU-aO-asD"/>
+                        <outlet property="currencyStackView" destination="oEj-T9-NFd" id="V7a-6Z-tls"/>
                         <outlet property="indicator" destination="K9s-46-aQu" id="zNT-U5-IMb"/>
+                        <outlet property="pickViewBottomConstraint" destination="7hj-OX-WQO" id="qOd-AP-dkp"/>
                         <outlet property="pickerView" destination="A1e-Ih-fNm" id="YKq-Pz-9TJ"/>
                         <outlet property="tableView" destination="qsc-Ju-vwn" id="QAw-YE-srJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="1jl-Rl-8c2">
-                    <connections>
-                        <action selector="chooseCurrency:" destination="BYZ-38-t0r" id="z0r-tA-iQl"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="78.348214285714278"/>
         </scene>

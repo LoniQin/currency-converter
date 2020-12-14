@@ -10,7 +10,7 @@ protocol CurrencyRepositoryProtocol {
     
     func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>)->Void)
     
-    func getExchangeRates(completion: @escaping (Result<QuoteList, NetworkingError>)->Void)
+    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>)->Void)
     
 }
 class CurrencyRepository: CurrencyRepositoryProtocol {
@@ -62,7 +62,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
         }
     }
     
-    func getExchangeRates(completion: @escaping (Result<QuoteList, NetworkingError>)->Void) {
+    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>)->Void) {
         let key = "exchange_rates"
         if let quoteList: QuoteList = try? storage.get(key), Date().timeIntervalSince(quoteList.created) < 30 * 60 {
             completion(.success(quoteList))

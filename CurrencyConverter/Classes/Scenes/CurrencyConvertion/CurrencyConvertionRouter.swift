@@ -6,9 +6,13 @@
 //
 import UIKit
 import Foundation
+
 protocol CurrencyConvertionRoutingLogic: AnyObject {
+    
     func routeToError(viewModel: CurrencyConvertion.ErrorViewModel)
+    
 }
+
 class CurrencyConvertionRouter: CurrencyConvertionRoutingLogic {
     
     weak var viewController: CurrencyConvertionViewController?

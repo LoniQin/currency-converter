@@ -33,6 +33,7 @@
 		F04BD87225867BE40042819A /* currency_converter.strings in Resources */ = {isa = PBXBuildFile; fileRef = F04BD87125867BE40042819A /* currency_converter.strings */; };
 		F04BD87825867C7A0042819A /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD87725867C7A0042819A /* LocalizationKey.swift */; };
 		F04BD883258681540042819A /* StringProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD882258681540042819A /* StringProvidable.swift */; };
+		F04BD888258718B90042819A /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD887258718B90042819A /* Amount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		F04BD87125867BE40042819A /* currency_converter.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = currency_converter.strings; sourceTree = "<group>"; };
 		F04BD87725867C7A0042819A /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
 		F04BD882258681540042819A /* StringProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProvidable.swift; sourceTree = "<group>"; };
+		F04BD887258718B90042819A /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 				F04BD85025864EF30042819A /* Currency.swift */,
 				F04BD867258675FA0042819A /* Quote.swift */,
 				F04BD86C25867A240042819A /* QuoteList.swift */,
+				F04BD887258718B90042819A /* Amount.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				F04BD87825867C7A0042819A /* LocalizationKey.swift in Sources */,
 				F04BD883258681540042819A /* StringProvidable.swift in Sources */,
 				F04BD7F42583CE010042819A /* CurrencyConvertionInteractor.swift in Sources */,
+				F04BD888258718B90042819A /* Amount.swift in Sources */,
 				F04BD7B52583CA1E0042819A /* SceneDelegate.swift in Sources */,
 				F04BD86D25867A240042819A /* QuoteList.swift in Sources */,
 				F04BD8052585F37B0042819A /* CurrencyConvertionConfigurator.swift in Sources */,

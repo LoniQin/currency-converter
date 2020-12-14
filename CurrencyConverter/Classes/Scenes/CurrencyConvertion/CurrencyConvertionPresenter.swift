@@ -5,14 +5,30 @@
 //  Created by Lonnie on 2020/12/11.
 //
 import Foundation
+
 protocol CurrencyConvertionPresentationLogic: AnyObject {
+    
     func presentSetupView(response: CurrencyConvertion.SetupViewResponse)
+    
     func presentLoading(response: CurrencyConvertion.LoadingResponse)
+    
     func presentError(response: CurrencyConvertion.ErrorResponse)
+    
     func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse)
+    
+    func presentAmount(response: CurrencyConvertion.UpdateAmountResponse)
+    
+    func presentExchangeRates(response: CurrencyConvertion.ExchangeRatesResponse)
+    
+    func presentCurrency(response: CurrencyConvertion.UpdateCurrencyResponse)
+    
 }
 
 class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
+    
+    struct Constants {
+        static let fractionDigitsCount = 4
+    }
     
     weak var viewController: CurrencyConvertionDisplayLogic?
     
@@ -52,12 +68,35 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
         let currencies = response.currencyList.currencies.map { "\($0.name)(\($0.detail))" }
         viewController?.displayCurrencyList(
             viewModel: .init(
-                selectedIndex: response.selectedIndex,
-                currencies: currencies,
-                currentCurrencyName: response.currencyList.currencies[response.selectedIndex].name
+                currencies: currencies
             )
         )
     }
     
+    func presentAmount(response: CurrencyConvertion.UpdateAmountResponse) {
+        viewController?.displayAmount(
+            viewModel: .init(amount: response.amount)
+        )
+    }
+    
+    func presentExchangeRates(response: CurrencyConvertion.ExchangeRatesResponse) {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = Constants.fractionDigitsCount
+        formatter.maximumFractionDigits = Constants.fractionDigitsCount
+        viewController?.displayExchangeRates(
+            viewModel: .init(
+                items: response.exchangeRates.map { "\(formatter.string(from: NSNumber(value: $0.amount)).unwrapped) \($0.currency)" }
+            )
+        )
+    }
+    
+    func presentCurrency(response: CurrencyConvertion.UpdateCurrencyResponse) {
+        viewController?.displayCurrency(
+            viewModel: .init(
+                selectedIndex: response.selectedIndex,
+                currentCurrencyName: response.currency.name
+            )
+        )
+    }
     
 }

@@ -6,6 +6,7 @@
 //
 import FoundationLib
 import Foundation
+
 struct CurrencyConvertionConfiguration {
     
     let httpClient: Networking
