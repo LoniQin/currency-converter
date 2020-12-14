@@ -14,11 +14,15 @@ protocol CurrencyConvertionBusinessLogic: AnyObject {
 
 class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     
+    var presenter: CurrencyConvertionPresentationLogic?
+    
     let configuration: CurrencyConvertionConfiguration
     
     let repository: CurrencyRepositoryProtocol
     
     var currencyList: CurrencyList?
+    
+    var selectedIndex = 0
     
     var quoteList: QuoteList?
     
@@ -27,12 +31,14 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         self.repository = repository
     }
     
-    var presenter: CurrencyConvertionPresentationLogic?
-    
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest) {
         presenter?.presentSetupView(response: .init())
-        getCurrencyListAndExchangeRates {
-            
+        getCurrencyListAndExchangeRates { [weak self] in
+            if let self = self, let currencyList = self.currencyList {
+                self.presenter?.presentCurrencyList(response: .init(
+                    selectedIndex: self.selectedIndex, currencyList: currencyList
+                ))
+            }
         }
     }
     

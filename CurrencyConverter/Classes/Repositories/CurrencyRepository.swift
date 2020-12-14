@@ -100,8 +100,8 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
         httpClient.send(request) { (result: Result<[String: Any], Error>) in
             do {
                 let dictionary = try result.get()
-                let succeed: Bool = try dictionary.get("success")
-                if succeed {
+                let success: Bool = try dictionary.get("success")
+                if success {
                     completion(.success(dictionary))
                 } else {
                     let error: [String: Any] = try dictionary.get("error")

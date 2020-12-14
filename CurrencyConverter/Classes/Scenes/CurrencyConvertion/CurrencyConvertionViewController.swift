@@ -8,8 +8,13 @@
 import UIKit
 
 protocol CurrencyConvertionDisplayLogic: AnyObject {
+    
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel)
+    
     func displayLoading(viewModel: CurrencyConvertion.LoadingViewModel)
+    
+    func displayCurrencyList(viewModel: CurrencyConvertion.CurrencyListViewModel)
+    
 }
 
 class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisplayLogic {
@@ -28,7 +33,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var currencies: [String] = []
+    var currentViewModel = CurrencyConvertion.CurrencyListViewModel(selectedIndex: 0, currencies: [], currentCurrencyName: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +68,13 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         }
     }
     
+    func displayCurrencyList(viewModel: CurrencyConvertion.CurrencyListViewModel) {
+        self.currentViewModel = viewModel
+        self.pickerView.selectRow(viewModel.selectedIndex, inComponent: 0, animated: true)
+        self.pickerView.reloadAllComponents()
+        self.currencyLabel.text = viewModel.currentCurrencyName
+    }
+    
 }
 
 extension CurrencyConvertionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -72,10 +84,11 @@ extension CurrencyConvertionViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        currencies.count
+        currentViewModel.currencies.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        currencies[row]
+        currentViewModel.currencies[row]
     }
+    
 }

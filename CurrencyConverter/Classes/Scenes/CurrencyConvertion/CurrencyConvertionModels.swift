@@ -25,15 +25,19 @@ enum CurrencyConvertion {
     
     struct CurrencyListResponse {
         
+        let selectedIndex: Int
+        
         let currencyList: CurrencyList
         
     }
     
     struct CurrencyListViewModel {
         
-        let selectedIndex: Int = 0
+        let selectedIndex: Int
         
         let currencies: [String]
+        
+        let currentCurrencyName: String
         
     }
     
@@ -67,7 +71,7 @@ enum CurrencyConvertion {
         
     }
     
-    // Network Error
+    // Error
     struct ErrorResponse {
         
         let error: NetworkingError

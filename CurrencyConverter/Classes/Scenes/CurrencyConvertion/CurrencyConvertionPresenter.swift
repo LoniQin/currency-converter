@@ -4,12 +4,12 @@
 //
 //  Created by Lonnie on 2020/12/11.
 //
-
 import Foundation
 protocol CurrencyConvertionPresentationLogic: AnyObject {
     func presentSetupView(response: CurrencyConvertion.SetupViewResponse)
     func presentLoading(response: CurrencyConvertion.LoadingResponse)
     func presentError(response: CurrencyConvertion.ErrorResponse)
+    func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse)
 }
 
 class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
@@ -38,6 +38,7 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
     }
     
     func presentError(response: CurrencyConvertion.ErrorResponse) {
+        
         let viewModel = CurrencyConvertion.ErrorViewModel(
             title: configuration.stringProvider.networkError(),
             comfirmTitle: configuration.stringProvider.retry(),
@@ -46,5 +47,17 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
         )
         router?.routeToError(viewModel: viewModel)
     }
+    
+    func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse) {
+        let currencies = response.currencyList.currencies.map { "\($0.name)(\($0.detail))" }
+        viewController?.displayCurrencyList(
+            viewModel: .init(
+                selectedIndex: response.selectedIndex,
+                currencies: currencies,
+                currentCurrencyName: response.currencyList.currencies[response.selectedIndex].name
+            )
+        )
+    }
+    
     
 }
