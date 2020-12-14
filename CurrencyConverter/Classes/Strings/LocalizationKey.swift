@@ -17,6 +17,8 @@ enum LocalizationKey: String {
     
     case currencyConvertionInputAmountHint
     
+    case noData
+    
     func localizedString() -> String {
         var key = ""
         for char in rawValue {

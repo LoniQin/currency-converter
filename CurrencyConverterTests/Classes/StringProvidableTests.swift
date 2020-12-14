@@ -16,6 +16,7 @@ class StringProvidableTests: XCTestCase {
         XCTAssertEqual(provider.networkError(), "Network error")
         XCTAssertEqual(provider.currencyConvertionTitle(), "Currency Converter")
         XCTAssertEqual(provider.currencyConvertionInputAmountHint(), "Please input amount...")
+        XCTAssertEqual(provider.noData(), "No data")
     }
 
 }

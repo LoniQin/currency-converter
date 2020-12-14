@@ -52,15 +52,21 @@
                                 <rect key="frame" x="197" y="499.5" width="20" height="20"/>
                             </activityIndicatorView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1e-Ih-fNm">
-                                <rect key="frame" x="0.0" y="1446" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="846" width="414" height="216"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-5F-A8d">
+                                <rect key="frame" x="186.5" y="499" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aNo-nQ-hfi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="4dD-aT-tAJ"/>
                             <constraint firstItem="qsc-Ju-vwn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5RE-og-Jlh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="A1e-Ih-fNm" secondAttribute="bottom" constant="-800" id="7hj-OX-WQO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="A1e-Ih-fNm" secondAttribute="bottom" constant="-200" id="7hj-OX-WQO"/>
                             <constraint firstItem="oEj-T9-NFd" firstAttribute="trailing" secondItem="aNo-nQ-hfi" secondAttribute="trailing" id="9La-qH-IQu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A1e-Ih-fNm" secondAttribute="trailing" id="AHS-UR-qlu"/>
                             <constraint firstItem="aNo-nQ-hfi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="ESc-IJ-i0A"/>
@@ -76,6 +82,8 @@
                             <constraint firstItem="oEj-T9-NFd" firstAttribute="top" secondItem="aNo-nQ-hfi" secondAttribute="bottom" constant="16" id="t9a-GZ-PxF"/>
                             <constraint firstItem="A1e-Ih-fNm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uzX-Ih-VZm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qsc-Ju-vwn" secondAttribute="trailing" id="x13-bM-gLB"/>
+                            <constraint firstItem="I2E-5F-A8d" firstAttribute="centerY" secondItem="qsc-Ju-vwn" secondAttribute="centerY" id="x8t-iy-scd"/>
+                            <constraint firstItem="I2E-5F-A8d" firstAttribute="centerX" secondItem="qsc-Ju-vwn" secondAttribute="centerX" id="zxM-DW-7xB"/>
                         </constraints>
                     </view>
                     <connections>
@@ -84,6 +92,7 @@
                         <outlet property="currencyLabel" destination="tdX-Yx-pE0" id="UmU-aO-asD"/>
                         <outlet property="currencyStackView" destination="oEj-T9-NFd" id="V7a-6Z-tls"/>
                         <outlet property="indicator" destination="K9s-46-aQu" id="zNT-U5-IMb"/>
+                        <outlet property="noDataLabel" destination="I2E-5F-A8d" id="0UA-Ig-pmh"/>
                         <outlet property="pickViewBottomConstraint" destination="7hj-OX-WQO" id="qOd-AP-dkp"/>
                         <outlet property="pickerView" destination="A1e-Ih-fNm" id="YKq-Pz-9TJ"/>
                         <outlet property="tableView" destination="qsc-Ju-vwn" id="QAw-YE-srJ"/>

@@ -10,3 +10,4 @@
 "cancel" = "Cancel";
 "currency_convertion_title" = "Currency Converter";
 "currency_convertion_input_amount_hint" = "Please input amount...";
+"no_data" = "No data";

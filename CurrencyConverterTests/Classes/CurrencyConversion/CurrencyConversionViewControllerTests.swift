@@ -43,6 +43,11 @@ class CurrencyConversionViewControllerTests: XCTestCase {
             requestExchangeRatesCalled = true
         }
         
+        var refreshDataCalled = false
+        func refreshData(request: CurrencyConvertion.RefreshDataRequest) {
+            refreshDataCalled = true
+        }
+        
     }
     
     let interactor = Interactor()
@@ -127,4 +132,14 @@ class CurrencyConversionViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.exchangeRatesViewModel.items, items)
     }
     
+    func testRefreshData() {
+        viewController.refresh()
+        XCTAssert(interactor.refreshDataCalled)
+    }
+    
+    func testDisplayNoData() {
+        viewController.displayNoData(viewModel: .init(title: "No data"))
+        XCTAssertEqual(viewController.noDataLabel.text, "No data")
+        XCTAssertFalse(viewController.noDataLabel.isHidden)
+    }
 }

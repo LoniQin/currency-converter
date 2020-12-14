@@ -18,6 +18,8 @@ protocol StringProvidable {
     
     func currencyConvertionInputAmountHint() -> String
     
+    func noData() -> String
+    
 }
 
 struct StringProvider: StringProvidable {
@@ -36,6 +38,10 @@ struct StringProvider: StringProvidable {
     
     func currencyConvertionTitle() -> String {
         LocalizationKey.currencyConvertionTitle.localizedString()
+    }
+    
+    func noData() -> String {
+        LocalizationKey.noData.localizedString()
     }
     
     func currencyConvertionInputAmountHint() -> String {

@@ -21,6 +21,9 @@ enum CurrencyConvertion {
         
     }
     
+    // Refresh data
+    struct RefreshDataRequest {}
+    
     // Currency List
     struct CurrencyListRequest {}
     
@@ -127,5 +130,9 @@ enum CurrencyConvertion {
         
         let retryBlock: ()->Void
         
+    }
+    
+    struct NoDataViewModel {
+        let title: String
     }
 }

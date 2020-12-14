@@ -60,6 +60,10 @@ class CurrencyConversionPresenterTests: XCTestCase {
             displayCurrencyCalled = true
         }
         
+        var displayNoDataCalled = false
+        func displayNoData(viewModel: CurrencyConvertion.NoDataViewModel) {
+            displayNoDataCalled = true
+        }
         
     }
     
@@ -105,6 +109,7 @@ class CurrencyConversionPresenterTests: XCTestCase {
             
         }))
         XCTAssert(router.routeToErrorCalled)
+        XCTAssert(viewController.displayNoDataCalled)
     }
     
     func testPresentAmount() {

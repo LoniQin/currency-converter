@@ -9,6 +9,8 @@ import Foundation
 
 protocol CurrencyConvertionBusinessLogic: AnyObject {
     
+    func refreshData(request: CurrencyConvertion.RefreshDataRequest)
+    
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest)
     
     func requestLoading(request: CurrencyConvertion.LoadingRequest)
@@ -48,6 +50,10 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest) {
         presenter?.presentSetupView(response: .init())
+        refreshData(request: .init())
+    }
+    
+    func refreshData(request: CurrencyConvertion.RefreshDataRequest) {
         getCurrencyListAndExchangeRates { [weak self] in
             if let self = self, let currencyList = self.currencyList {
                 self.presenter?.presentCurrencyList(response: .init(

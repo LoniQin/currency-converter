@@ -62,6 +62,9 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
             retryBlock: response.retryBlock
         )
         router?.routeToError(viewModel: viewModel)
+        viewController?.displayNoData(
+            viewModel: .init(title: configuration.stringProvider.noData())
+        )
     }
     
     func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse) {
