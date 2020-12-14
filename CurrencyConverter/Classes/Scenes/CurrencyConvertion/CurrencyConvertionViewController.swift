@@ -91,7 +91,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         )
         amountField.addTarget(self, action: #selector(updateAmount(textField:)), for: .allEditingEvents)
         currencyStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseCurrency)))
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismisKeyboard)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     @objc func updateAmount(textField: UITextField) {
         interactor?.updateAmount(
@@ -101,7 +101,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         )
     }
     
-    @objc func dismisKeyboard() {
+    @objc func dismissKeyboard() {
         amountField.resignFirstResponder()
     }
     

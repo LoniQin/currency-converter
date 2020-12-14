@@ -10,46 +10,6 @@ import XCTest
 
 class CurrencyRepositoryTests: XCTestCase {
     
-    class EmptyURLSessionTask: URLSessionTaskProtocol {
-        
-        func resume() {
-            
-        }
-        
-        func cancel() {
-            
-        }
-        
-        func suspend() {
-            
-        }
-    }
-    
-    class MockHttpClient: Networking {
-        
-        var showError = false
-        
-        var fileMapper = [
-            "/list":"currencyList",
-            "/live":"quoteList"
-        ]
-        
-        func send<T>(_ request: RequestConvertable, completion: @escaping (Result<T, Error>) -> Void) -> URLSessionTaskProtocol? where T : ResponseConvertable {
-            
-            if showError {
-                completion(.failure(NSError(domain: "", code: 0, userInfo: nil)))
-            } else {
-                let path = (try? request.toURLRequest().url?.path).unwrapped
-                let jsonDataPath = fileMapper[path].unwrapped
-                if let url = Bundle(for: CurrencyRepositoryTests.classForCoder()).url(forResource: jsonDataPath, withExtension: "json") {
-                    HttpClient.default.download(url, completion: completion)
-                }
-            }
-            return EmptyURLSessionTask()
-        }
-    
-    }
-    
     let httpClient = MockHttpClient()
     
     let storage = try! DataStoreManager(strategy: .memory)
@@ -80,8 +40,8 @@ class CurrencyRepositoryTests: XCTestCase {
             }
         }
         httpClient.showError = true
-        repository.getCurrencyList { list in
-            switch list {
+        repository.getCurrencyList { result in
+            switch result {
             case .success:
                 XCTAssertThrowsError("Failure")
             case .failure:
@@ -95,8 +55,8 @@ class CurrencyRepositoryTests: XCTestCase {
     }
     
     func testGetQuoteList() {
-        let successExpectation = self.expectation(description: "Get currency list succeeded")
-        let failureExpectation = self.expectation(description: "Get currency list failed")
+        let successExpectation = self.expectation(description: "Get quote list succeeded")
+        let failureExpectation = self.expectation(description: "Get quote list failed")
         let repository = CurrencyRepository(httpClient: httpClient, storage: storage)
         httpClient.showError = false
         repository.getQuoteList { [unowned self] result in
@@ -115,8 +75,8 @@ class CurrencyRepositoryTests: XCTestCase {
             }
         }
         httpClient.showError = true
-        repository.getQuoteList { list in
-            switch list {
+        repository.getQuoteList { result in
+            switch result {
             case .success:
                 XCTAssertThrowsError("Failure")
             case .failure:

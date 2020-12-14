@@ -119,6 +119,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
             result[quote.to] = quote.rate
         }
         let currencyQuote = quoteDictionary[currency].unwrapped
+        guard currencyQuote > 0 else { return }
         let exchangeRates = currencyList.currencies.map {
             ExchangeRate(
                 amount:  (quoteDictionary[$0.name].unwrapped / currencyQuote) * amount,
