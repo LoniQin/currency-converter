@@ -43,6 +43,8 @@
 		F04BD8DD2587747A0042819A /* CurrencyConversionInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8DC2587747A0042819A /* CurrencyConversionInteractorTests.swift */; };
 		F04BD8E2258775510042819A /* MockHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8E1258775510042819A /* MockHttpClient.swift */; };
 		F04BD8E82587758E0042819A /* EmptyURLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8E72587758E0042819A /* EmptyURLSessionTask.swift */; };
+		F04BD8F02587815F0042819A /* CurrencyConversionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8EF2587815F0042819A /* CurrencyConversionPresenterTests.swift */; };
+		F04BD8F5258785420042819A /* CurrencyConversionRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8F4258785420042819A /* CurrencyConversionRouterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,8 @@
 		F04BD8DC2587747A0042819A /* CurrencyConversionInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionInteractorTests.swift; sourceTree = "<group>"; };
 		F04BD8E1258775510042819A /* MockHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHttpClient.swift; sourceTree = "<group>"; };
 		F04BD8E72587758E0042819A /* EmptyURLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyURLSessionTask.swift; sourceTree = "<group>"; };
+		F04BD8EF2587815F0042819A /* CurrencyConversionPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionPresenterTests.swift; sourceTree = "<group>"; };
+		F04BD8F4258785420042819A /* CurrencyConversionRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionRouterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +306,8 @@
 			children = (
 				F04BD8D425876BED0042819A /* CurrencyConversionViewControllerTests.swift */,
 				F04BD8DC2587747A0042819A /* CurrencyConversionInteractorTests.swift */,
+				F04BD8EF2587815F0042819A /* CurrencyConversionPresenterTests.swift */,
+				F04BD8F4258785420042819A /* CurrencyConversionRouterTests.swift */,
 			);
 			path = CurrencyConversion;
 			sourceTree = "<group>";
@@ -481,10 +487,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F04BD8F02587815F0042819A /* CurrencyConversionPresenterTests.swift in Sources */,
 				F04BD8B225875CCA0042819A /* ExtensionTests.swift in Sources */,
 				F04BD8DD2587747A0042819A /* CurrencyConversionInteractorTests.swift in Sources */,
 				F04BD8E2258775510042819A /* MockHttpClient.swift in Sources */,
 				F04BD8A725875B800042819A /* StringProvidableTests.swift in Sources */,
+				F04BD8F5258785420042819A /* CurrencyConversionRouterTests.swift in Sources */,
 				F04BD8BA25875F0E0042819A /* CurrencyRepositoryTests.swift in Sources */,
 				F04BD8E82587758E0042819A /* EmptyURLSessionTask.swift in Sources */,
 				F04BD7CA2583CA1F0042819A /* CurrencyConverterTests.swift in Sources */,

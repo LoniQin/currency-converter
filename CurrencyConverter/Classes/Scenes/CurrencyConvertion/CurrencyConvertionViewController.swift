@@ -75,8 +75,8 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel) {
         title = viewModel.title
-        view.backgroundColor = UIColor.systemBackground
-        pickerView.backgroundColor = UIColor.systemBackground
+        view.backgroundColor = UIColor.white
+        pickerView.backgroundColor = UIColor.white
         amountField.placeholder = viewModel.amountHint
         amountField.keyboardType = .decimalPad
         amountField.delegate = self
@@ -171,6 +171,7 @@ extension CurrencyConvertionViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier)!
         cell.textLabel?.text = exchangeRatesViewModel.items[indexPath.row]
+        cell.textLabel?.textColor = .black
         return cell
     }
     
