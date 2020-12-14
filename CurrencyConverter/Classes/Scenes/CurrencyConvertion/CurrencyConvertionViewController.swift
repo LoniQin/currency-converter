@@ -36,6 +36,8 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         static let separatorHeight: CGFloat = 1
         
         static let pickerViewHiddenConstant: CGFloat = 0
+        
+        static let tableViewEstimatedRowHeight: CGFloat = 50
     }
     
     var interactor: CurrencyConvertionBusinessLogic?
@@ -92,16 +94,13 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         amountField.keyboardType = .decimalPad
         amountField.delegate = self
         indicator.hidesWhenStopped = true
-        pickerView.layer.shadowRadius = 8
-        pickerView.layer.masksToBounds = false
-        pickerView.layer.shadowColor = UIColor.black.cgColor
-        pickerView.layer.shadowOffset = .init(width: 0, height: -3)
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         pickerView.delegate = self
+        tableView.estimatedRowHeight = Constants.tableViewEstimatedRowHeight
         tableView.register(
-            UITableViewCell.self,
+            UINib(nibName: "ExchangeRatesCell", bundle: nil),
             forCellReuseIdentifier: Constants.reuseIdentifier
         )
         amountField.addTarget(self, action: #selector(updateAmount(textField:)), for: .allEditingEvents)
@@ -109,7 +108,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
         let line = UIView()
-        line.backgroundColor = .separator
+        line.backgroundColor = .opaqueSeparator
         pickerView.addSubview(line)
         line.translatesAutoresizingMaskIntoConstraints = false
         pickerView.addConstraints([
@@ -202,7 +201,6 @@ extension CurrencyConvertionViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(#function, row)
         togglePickerView { [weak self] in
             self?.interactor?.updateCurrency(request: .init(selectedIndex: row))
         }
@@ -213,10 +211,15 @@ extension CurrencyConvertionViewController: UIPickerViewDelegate, UIPickerViewDa
 
 extension CurrencyConvertionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier)!
-        cell.textLabel?.text = exchangeRatesViewModel.items[indexPath.row]
-        cell.textLabel?.textColor = .black
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier) as? ExchangeRatesCell else {
+            return UITableViewCell()
+        }
+        cell.titleLabel.text = exchangeRatesViewModel.items[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

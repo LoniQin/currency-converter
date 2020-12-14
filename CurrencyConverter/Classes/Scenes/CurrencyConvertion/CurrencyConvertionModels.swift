@@ -8,7 +8,7 @@
 import Foundation
 
 enum CurrencyConvertion {
-    // Set up view
+    //MARK: Set up view
     struct SetupViewRequest {}
     
     struct SetupViewResponse {}
@@ -21,10 +21,10 @@ enum CurrencyConvertion {
         
     }
     
-    // Refresh data
+    //MARK: Refresh data
     struct RefreshDataRequest {}
     
-    // Currency List
+    //MARK: Currency List
     struct CurrencyListRequest {}
     
     struct CurrencyListResponse {
@@ -39,7 +39,7 @@ enum CurrencyConvertion {
         
     }
     
-    // Update amount
+    //MARK: Update amount
     struct UpdateAmountRequest {
         
         let amount: String
@@ -58,7 +58,7 @@ enum CurrencyConvertion {
         
     }
     
-    // Update Currency
+    //MARK: Update Currency
     struct UpdateCurrencyRequest {
         
         let selectedIndex: Int
@@ -77,7 +77,7 @@ enum CurrencyConvertion {
         let currentCurrencyName: String
     }
     
-    // Get Exchange rates
+    //MARK: Exchange rates
     struct ExchangeRatesRequest {
         
     }
@@ -92,7 +92,7 @@ enum CurrencyConvertion {
         
     }
     
-    // Loading
+    //MARK: Loading
     struct LoadingRequest {
         
         let loading: Bool
@@ -111,7 +111,7 @@ enum CurrencyConvertion {
         
     }
     
-    // Error
+    //MARK: Error
     struct ErrorResponse {
         
         let error: NetworkingError
@@ -132,6 +132,7 @@ enum CurrencyConvertion {
         
     }
     
+    //MARK: No Data
     struct NoDataViewModel {
         let title: String
     }

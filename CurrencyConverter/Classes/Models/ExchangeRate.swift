@@ -1,5 +1,5 @@
 //
-//  Amount.swift
+//  ExchangeRate.swift
 //  CurrencyConverter
 //
 //  Created by Lonnie on 2020/12/14.
