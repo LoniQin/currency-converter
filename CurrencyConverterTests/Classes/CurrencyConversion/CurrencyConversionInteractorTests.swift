@@ -43,12 +43,16 @@ class CurrencyConversionInteractorTests: XCTestCase {
             presentErrorCalled = true
         }
         
+        var presentCurrencyListCalled = false
         func presentCurrencyList(response: CurrencyConvertion.CurrencyListResponse) {
-            
+            presentCurrencyListCalled = true
         }
         
+        var presentAmountCalled = false
+        var amount = ""
         func presentAmount(response: CurrencyConvertion.UpdateAmountResponse) {
-            
+            presentAmountCalled = true
+            amount = response.amount
         }
         
         var presentExchangeRatesCalled = false
@@ -83,9 +87,11 @@ class CurrencyConversionInteractorTests: XCTestCase {
             XCTAssert(self.presenter.presentSetupViewCalled)
             XCTAssert(self.presenter.presentLoadingCalled)
             XCTAssert(self.presenter.presentCurrencyCalled)
+            XCTAssert(self.presenter.presentCurrencyCalled)
             XCTAssert(self.presenter.presentExchangeRatesCalled)
             expectation.fulfill()
         }
+        
         self.waitForExpectations(timeout: 2) { _ in
             
         }
@@ -102,7 +108,7 @@ class CurrencyConversionInteractorTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssert(self.presenter.presentSetupViewCalled)
             XCTAssert(self.presenter.presentLoadingCalled)
-            XCTAssertFalse(self.presenter.presentCurrencyCalled)
+            XCTAssertFalse(self.presenter.presentCurrencyListCalled)
             XCTAssertFalse(self.presenter.presentExchangeRatesCalled)
             XCTAssert(self.presenter.presentErrorCalled)
             expectation.fulfill()
@@ -127,6 +133,75 @@ class CurrencyConversionInteractorTests: XCTestCase {
             XCTAssert(self.presenter.presentErrorCalled)
             expectation.fulfill()
         }
+        self.waitForExpectations(timeout: 2) { _ in
+            
+        }
+    }
+    
+    func testUpdateAmount() {
+        interactor.updateAmount(request: .init(amount: "2.3"))
+        XCTAssert(presenter.presentAmountCalled)
+        XCTAssertEqual(presenter.amount, "2.3")
+        interactor.updateAmount(request: .init(amount: "2."))
+        XCTAssertEqual(presenter.amount, "2.")
+        interactor.updateAmount(request: .init(amount: "2.."))
+        XCTAssertEqual(presenter.amount, "2.")
+        interactor.updateAmount(request: .init(amount: ""))
+        XCTAssertEqual(presenter.amount, "")
+    }
+    
+    func testUpdateCurrency() {
+        presenter.presentCurrencyCalled = false
+        presenter.presentLoadingCalled = false
+        presenter.presentExchangeRatesCalled = false
+        let expectation = self.expectation(description: #function)
+        presenter.presentLoadingCalled = false
+        httpClient.showError = false
+        interactor.currencyList = CurrencyList(["HRK" : "Croatian Kuna",
+                                               "HUF" : "Hungarian Forint",
+                                               "CDF" : "Congolese Franc",
+                                               "ILS" : "Israeli New Sheqel",
+                                               "NGN" : "Nigerian Naira",
+                                               "GYD" : "Guyanaese Dollar",
+                                               "BYR" : "Belarusian Ruble",
+                                               "BHD" : "Bahraini Dinar",
+                                               "SZL" : "Swazi Lilangeni",
+                                               "INR" : "Indian Rupee",
+                                               "SDG" : "Sudanese Pound",
+                                               "PEN" : "Peruvian Nuevo Sol",
+                                               "EUR" : "Euro",
+                                               "QAR" : "Qatari Rial",
+                                               "PGK" : "Papua New Guinean Kina",
+                                               "LRD" : "Liberian Dollar",
+                                               "ISK" : "Icelandic Króna",
+                                               "SYP" : "Syrian Pound",
+                                               "TRY" : "Turkish Lira"])
+        interactor.updateCurrency(request: .init(selectedIndex: 1))
+        XCTAssertEqual(interactor.selectedIndex, 1)
+        XCTAssertTrue(presenter.presentLoadingCalled)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertTrue(self.presenter.presentCurrencyCalled)
+            XCTAssertTrue(self.presenter.presentExchangeRatesCalled)
+            expectation.fulfill()
+        }
+        self.waitForExpectations(timeout: 2) { _ in
+            
+        }
+    }
+    
+    func testRequestExchangeRates() {
+        presenter.presentExchangeRatesCalled = true
+        let expectation = self.expectation(description: #function)
+        httpClient.showError = false
+        interactor.getCurrencyListAndExchangeRates { [weak self] in
+            self?.interactor.requestExchangeRates(request: .init())
+            XCTAssertEqual(self?.presenter.presentExchangeRatesCalled, true)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            expectation.fulfill()
+        }
+        
         self.waitForExpectations(timeout: 2) { _ in
             
         }
