@@ -86,6 +86,7 @@
                         <outlet property="chevronImageView" destination="FHy-EZ-u3R" id="EUe-WJ-CLp"/>
                         <outlet property="currencyLabel" destination="tdX-Yx-pE0" id="UmU-aO-asD"/>
                         <outlet property="indicator" destination="K9s-46-aQu" id="zNT-U5-IMb"/>
+                        <outlet property="pickerView" destination="A1e-Ih-fNm" id="YKq-Pz-9TJ"/>
                         <outlet property="tableView" destination="qsc-Ju-vwn" id="QAw-YE-srJ"/>
                     </connections>
                 </viewController>

@@ -9,6 +9,7 @@ import Foundation
 
 protocol CurrencyConvertionBusinessLogic: AnyObject {
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest)
+    func requestLoading(request: CurrencyConvertion.LoadingRequest)
 }
 
 class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
@@ -16,6 +17,10 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     let configuration: CurrencyConvertionConfiguration
     
     let repository: CurrencyRepositoryProtocol
+    
+    var currencyList: CurrencyList?
+    
+    var quoteList: QuoteList?
     
     public init(configuration: CurrencyConvertionConfiguration, repository: CurrencyRepositoryProtocol) {
         self.configuration = configuration
@@ -26,30 +31,40 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest) {
         presenter?.presentSetupView(response: .init())
-        repository.getCurrencyList { (result) in
-            switch result {
-            case .success(let list):
-                print(list)
-            case .failure(let error):
-                print(error)
-            }
-        }
-        repository.getExchangeRates { (result) in
-            switch result {
-            case .success(let list):
-                print(list)
-            case .failure(let error):
-                print(error)
-            }
+        getCurrencyListAndExchangeRates {
+            
         }
     }
     
-    func getCurrencyList() {
-        
+    func requestLoading(request: CurrencyConvertion.LoadingRequest) {
+        presenter?.presentLoading(response: .init(loading: request.loading))
     }
     
-    func getQuoteList() {
-        
+    func getCurrencyListAndExchangeRates(completion: @escaping ()->Void) {
+        requestLoading(request: .init(loading: true))
+        repository.getCurrencyList { [weak self] (result) in
+            switch result {
+            case .success(let currencyList):
+                self?.currencyList = currencyList
+                self?.repository.getExchangeRates { result in
+                    self?.requestLoading(request: .init(loading: false))
+                    switch result {
+                    case .success(let quoteList):
+                        self?.quoteList = quoteList
+                        completion()
+                    case .failure(let error):
+                        self?.presenter?.presentError(response: .init(error: error, retryBlock: {
+                            self?.getCurrencyListAndExchangeRates(completion: completion)
+                        }))
+                    }
+                }
+            case .failure(let error):
+                self?.requestLoading(request: .init(loading: false))
+                self?.presenter?.presentError(response: .init(error: error, retryBlock: {
+                    self?.getCurrencyListAndExchangeRates(completion: completion)
+                }))
+            }
+        }
     }
-    
+
 }

@@ -5,4 +5,8 @@
   Created by Lonnie on 2020/12/14.
   
 */
+"network_error" = "Network error";
+"c" = "Retry";
+"cancel" = "Cancel";
 "currency_convertion_title" = "Currency Converter";
+"currency_convertion_input_amount_hint" = "Please input amount...";

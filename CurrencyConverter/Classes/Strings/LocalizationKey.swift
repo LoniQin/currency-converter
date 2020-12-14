@@ -7,7 +7,15 @@
 import Foundation
 enum LocalizationKey: String {
     
+    case networkError
+    
+    case retry
+    
+    case cancel
+    
     case currencyConvertionTitle
+    
+    case currencyConvertionInputAmountHint
     
     func localizedString() -> String {
         var key = ""
@@ -15,7 +23,7 @@ enum LocalizationKey: String {
             if char.isUppercase {
                 key.append("_")
             }
-            key.append(char)
+            key.append(char.lowercased())
         }
         return NSLocalizedString(key, tableName: "currency_converter", comment: "")
     }

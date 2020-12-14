@@ -9,6 +9,7 @@ import UIKit
 
 protocol CurrencyConvertionDisplayLogic: AnyObject {
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel)
+    func displayLoading(viewModel: CurrencyConvertion.LoadingViewModel)
 }
 
 class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisplayLogic {
@@ -25,6 +26,10 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    var currencies: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.requestSetupView(request: .init())
@@ -36,9 +41,41 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel) {
         title = viewModel.title
-        currencyLabel.isHidden = true
-        chevronImageView.isHidden = true
-        tableView.isHidden = true
+        amountField.placeholder = viewModel.amountHint
+        indicator.hidesWhenStopped = true
+        tableView.tableFooterView = UIView()
+        pickerView.delegate = self
     }
     
+    func displayLoading(viewModel: CurrencyConvertion.LoadingViewModel) {
+        if viewModel.isAnimating {
+            indicator.startAnimating()
+            amountField.isHidden = true
+            currencyLabel.isHidden = true
+            chevronImageView.isHidden = true
+            tableView.isHidden = true
+        } else {
+            indicator.stopAnimating()
+            amountField.isHidden = false
+            currencyLabel.isHidden = false
+            chevronImageView.isHidden = false
+            tableView.isHidden = false
+        }
+    }
+    
+}
+
+extension CurrencyConvertionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        currencies.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        currencies[row]
+    }
 }

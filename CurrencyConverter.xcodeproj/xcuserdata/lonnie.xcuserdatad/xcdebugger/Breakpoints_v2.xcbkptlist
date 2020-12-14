@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "106B42D6-D989-47F7-8378-1C54D8D9D9FA"
+            uuid = "EA9511CD-E8C4-47C1-BA34-CEE69DB92950"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CurrencyConverter/Classes/Repositories/CurrencyRepository.swift"
+            filePath = "CurrencyConverter/Classes/Scenes/CurrencyConvertion/CurrencyConvertionPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "getExchangeRates(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EAA5F30A-2D26-455E-B631-89287FAFE7C1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CurrencyConverter/Classes/Repositories/CurrencyRepository.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "getCurrencyList(completion:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "presentError(response:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
