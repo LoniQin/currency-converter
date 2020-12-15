@@ -4,7 +4,7 @@
 //
 //  Created by Lonnie on 2020/12/11.
 //
-
+import UIKit
 import Foundation
 
 enum CurrencyConvertion {
@@ -127,7 +127,7 @@ enum CurrencyConvertion {
         
         let error: NetworkingError
         
-        let retryBlock: ()->Void
+        let retryBlock: () -> Void
         
     }
     
@@ -135,11 +135,7 @@ enum CurrencyConvertion {
     
         let title: String
         
-        let comfirmTitle: String
-        
-        let cancelTitle: String
-        
-        let retryBlock: ()->Void
+        let actions: [UIAlertAction]
         
     }
     

@@ -8,9 +8,9 @@ import FoundationLib
 import Foundation
 protocol CurrencyRepositoryProtocol {
     
-    func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>)->Void)
+    func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>) -> Void)
     
-    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>)->Void)
+    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>) -> Void)
     
 }
 class CurrencyRepository: CurrencyRepositoryProtocol {

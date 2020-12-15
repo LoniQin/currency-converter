@@ -30,9 +30,11 @@ class CurrencyConversionRouterTests: XCTestCase {
         router.viewController = viewController
     }
     func testRouteToError() {
-        let viewModel = CurrencyConvertion.ErrorViewModel(title: "", comfirmTitle: "", cancelTitle: "", retryBlock: {
-            
-        })
+        let actions = [UIAlertAction()]
+        let viewModel = CurrencyConvertion.ErrorViewModel(
+            title: "",
+            actions: actions
+        )
         router.routeToError(viewModel: viewModel)
         XCTAssertEqual(viewController.presented, true)
     }

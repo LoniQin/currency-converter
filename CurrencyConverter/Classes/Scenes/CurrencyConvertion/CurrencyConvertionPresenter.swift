@@ -5,7 +5,7 @@
 //  Created by Lonnie on 2020/12/11.
 //
 import Foundation
-
+import UIKit
 protocol CurrencyConvertionPresentationLogic: AnyObject {
     
     func presentSetupView(response: CurrencyConvertion.SetupViewResponse)
@@ -54,12 +54,14 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
     }
     
     func presentError(response: CurrencyConvertion.ErrorResponse) {
-        
+        var actions = [UIAlertAction]()
+        actions.append(.init(title: configuration.stringProvider.retry(), style: .default, handler: { (action) in
+            response.retryBlock()
+        }))
+        actions.append(.init(title: configuration.stringProvider.cancel(), style: .cancel, handler: nil))
         let viewModel = CurrencyConvertion.ErrorViewModel(
             title: configuration.stringProvider.networkError(),
-            comfirmTitle: configuration.stringProvider.retry(),
-            cancelTitle: configuration.stringProvider.cancel(),
-            retryBlock: response.retryBlock
+            actions: actions
         )
         router?.routeToError(viewModel: viewModel)
         viewController?.displayNoData(

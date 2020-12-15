@@ -75,7 +75,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         presenter?.presentLoading(response: .init(loading: request.loading))
     }
     
-    func getCurrencyListAndExchangeRates(completion: @escaping ()->Void) {
+    func getCurrencyListAndExchangeRates(completion: @escaping () -> Void) {
         requestLoading(request: .init(loading: true))
         repository.getCurrencyList { [weak self] (result) in
             switch result {
@@ -96,7 +96,7 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         }
     }
     
-    func getQuoteList(completion: @escaping ()->Void) {
+    func getQuoteList(completion: @escaping () -> Void) {
         repository.getQuoteList { [ weak self] result in
             self?.requestLoading(request: .init(loading: false))
             switch result {

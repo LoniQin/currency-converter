@@ -69,7 +69,9 @@ class CurrencyConversionPresenterTests: XCTestCase {
     
     class Router: CurrencyConvertionRoutingLogic {
         var routeToErrorCalled = false
+        var actions = [UIAlertAction]()
         func routeToError(viewModel: CurrencyConvertion.ErrorViewModel) {
+            actions = viewModel.actions
             routeToErrorCalled = true
         }
     }
@@ -106,7 +108,6 @@ class CurrencyConversionPresenterTests: XCTestCase {
     
     func testPresentError() {
         presenter.presentError(response: .init(error: .serverError(ServerError(code: 404, info: "Not found")), retryBlock: {
-            
         }))
         XCTAssert(router.routeToErrorCalled)
         XCTAssert(viewController.displayNoDataCalled)

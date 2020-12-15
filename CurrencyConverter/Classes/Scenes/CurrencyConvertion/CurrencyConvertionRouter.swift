@@ -19,10 +19,9 @@ class CurrencyConvertionRouter: CurrencyConvertionRoutingLogic {
     
     func routeToError(viewModel: CurrencyConvertion.ErrorViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .alert)
-        alert.addAction(.init(title: viewModel.comfirmTitle, style: .default, handler: { (action) in
-            viewModel.retryBlock()
-        }))
-        alert.addAction(.init(title: viewModel.cancelTitle, style: .cancel, handler: nil))
+        viewModel.actions.forEach {
+            alert.addAction($0)
+        }
         viewController?.present(alert, animated: true)
     }
     

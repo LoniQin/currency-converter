@@ -72,7 +72,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         interactor?.refreshData(request: .init())
     }
     
-    @objc func togglePickerView(completion: @escaping ()->Void = {}) {
+    @objc func togglePickerView(completion: @escaping () -> Void = {}) {
         UIView.animate(withDuration: Constants.animationDuration) {
             self.pickViewBottomConstraint.constant = (self.pickViewBottomConstraint.constant == Constants.pickerViewHiddenConstant) ? -(self.pickerView.frame.size.height + self.view.safeAreaInsets.bottom) : Constants.pickerViewHiddenConstant
             self.view.layoutIfNeeded()
@@ -139,21 +139,15 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     func displayLoading(viewModel: CurrencyConvertion.LoadingViewModel) {
         if viewModel.isAnimating {
             indicator.startAnimating()
-            noDataLabel.isHidden = true
-            amountField.isHidden = true
-            currencyLabel.isHidden = true
-            chevronImageView.isHidden = true
-            tableView.isHidden = true
-            navigationItem.rightBarButtonItem?.isEnabled = false
         } else {
             indicator.stopAnimating()
-            noDataLabel.isHidden = true
-            amountField.isHidden = false
-            currencyLabel.isHidden = false
-            chevronImageView.isHidden = false
-            tableView.isHidden = false
-            navigationItem.rightBarButtonItem?.isEnabled = true
         }
+        amountField.isHidden = viewModel.isAnimating
+        currencyLabel.isHidden = viewModel.isAnimating
+        chevronImageView.isHidden = viewModel.isAnimating
+        tableView.isHidden = viewModel.isAnimating
+        navigationItem.rightBarButtonItem?.isEnabled = !viewModel.isAnimating
+        noDataLabel.isHidden = true
     }
     
     func displayCurrency(viewModel: CurrencyConvertion.UpdateCurrencyViewModel) {
