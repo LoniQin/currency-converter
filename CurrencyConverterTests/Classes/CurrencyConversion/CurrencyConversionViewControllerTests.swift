@@ -60,6 +60,7 @@ class CurrencyConversionViewControllerTests: XCTestCase {
     
     func testRequestSetupViewCalled() {
         XCTAssert(interactor.requestSetupViewCalled)
+        XCTAssert(interactor.refreshDataCalled)
     }
     
     func testUpdateAmount() {

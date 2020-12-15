@@ -69,6 +69,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.requestSetupView(request: .init())
+        interactor?.refreshData(request: .init())
     }
     
     @objc func togglePickerView(completion: @escaping ()->Void = {}) {

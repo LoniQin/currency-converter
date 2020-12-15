@@ -40,7 +40,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
         "9cf6f6e6012a36183aed686b3b93290c"
     }
     
-    func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>)->Void) {
+    func getCurrencyList(completion: @escaping (Result<CurrencyList, NetworkingError>) -> Void) {
         if let currencyList: CurrencyList = try? storage.get(Constants.currencyListKey) {
             completion(.success(currencyList))
             return
@@ -52,24 +52,20 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
             query: HTTP.query(access_key: accessKey())
         )
         _ = get(request: request) { [weak self] (result) in
-            switch result {
-            case .success(let diciontary):
-                do {
-                    let currencies: [String: String] = try diciontary.get("currencies")
-                    let currencyList = CurrencyList(currencies)
-                    try self?.storage.set(currencyList, for: Constants.currencyListKey)
-                    try self?.storage.save()
-                    completion(.success(currencyList))
-                } catch let error {
-                    completion(.failure(.unknownError(error)))
-                }
-            case .failure(let error):
-                completion(.failure(error))
+            do {
+                let diciontary = try result.get()
+                let currencies: [String: String] = try diciontary.get("currencies")
+                let currencyList = CurrencyList(currencies)
+                try self?.storage.set(currencyList, for: Constants.currencyListKey)
+                try self?.storage.save()
+                completion(.success(currencyList))
+            } catch let error {
+                completion(.failure(.unknownError(error)))
             }
         }
     }
     
-    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>)->Void) {
+    func getQuoteList(completion: @escaping (Result<QuoteList, NetworkingError>) -> Void) {
         if
             let quoteList: QuoteList = try? storage.get(Constants.quoteListKey),
             Date().timeIntervalSince(quoteList.created) < 30.minute {
@@ -83,20 +79,16 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
             query: HTTP.query(access_key: accessKey())
         )
         _ = get(request: request) { [weak self] (result) in
-            switch result {
-            case .success(let diciontary):
-                do {
-                    let source: String = try diciontary.get("source")
-                    let quotes: [String: Double] = try diciontary.get("quotes")
-                    let quoteList = QuoteList(quotes, source: source)
-                    try self?.storage.set(quoteList, for: Constants.quoteListKey)
-                    try self?.storage.save()
-                    completion(.success(quoteList))
-                } catch let error {
-                    completion(.failure(.unknownError(error)))
-                }
-            case .failure(let error):
-                completion(.failure(error))
+            do {
+                let diciontary = try result.get()
+                let source: String = try diciontary.get("source")
+                let quotes: [String: Double] = try diciontary.get("quotes")
+                let quoteList = QuoteList(quotes, source: source)
+                try self?.storage.set(quoteList, for: Constants.quoteListKey)
+                try self?.storage.save()
+                completion(.success(quoteList))
+            } catch let error {
+                completion(.failure(.unknownError(error)))
             }
         }
     }

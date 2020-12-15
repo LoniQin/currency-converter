@@ -50,24 +50,24 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
     
     func requestSetupView(request: CurrencyConvertion.SetupViewRequest) {
         presenter?.presentSetupView(response: .init())
-        refreshData(request: .init())
     }
     
     func refreshData(request: CurrencyConvertion.RefreshDataRequest) {
         getCurrencyListAndExchangeRates { [weak self] in
-            if let self = self, let currencyList = self.currencyList {
-                self.presenter?.presentCurrencyList(response: .init(
+            guard let self = self, let currencyList = self.currencyList else { return }
+            self.presenter?.presentCurrencyList(
+                response: .init(
                     currencyList: currencyList
-                ))
-                self.presenter?.presentCurrency(
-                    response:.init(
-                        selectedIndex: self.selectedIndex,
-                        currency: currencyList.currencies[self.selectedIndex]
-                    )
                 )
-                self.presenter?.presentAmount(response: .init(amount: self.amount))
-                self.requestExchangeRates(request: .init())
-            }
+            )
+            self.presenter?.presentCurrency(
+                response:.init(
+                    selectedIndex: self.selectedIndex,
+                    currency: currencyList.currencies[self.selectedIndex]
+                )
+            )
+            self.presenter?.presentAmount(response: .init(amount: self.amount))
+            self.requestExchangeRates(request: .init())
         }
     }
     
@@ -146,15 +146,14 @@ class CurrencyConvertionInteractor: CurrencyConvertionBusinessLogic {
         selectedIndex = request.selectedIndex
         requestLoading(request: .init(loading: true))
         getQuoteList { [weak self] in
-            if let self = self, let currency = self.currencyList {
-                self.presenter?.presentCurrency(
-                    response: .init(
-                        selectedIndex: self.selectedIndex,
-                        currency: currency.currencies[self.selectedIndex]
-                    )
+            guard let self = self, let currency = self.currencyList else { return }
+            self.presenter?.presentCurrency(
+                response: .init(
+                    selectedIndex: self.selectedIndex,
+                    currency: currency.currencies[self.selectedIndex]
                 )
-                self.requestExchangeRates(request: .init())
-            }
+            )
+            self.requestExchangeRates(request: .init())
         }
     }
 

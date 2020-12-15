@@ -75,16 +75,15 @@ class CurrencyConversionInteractorTests: XCTestCase {
         interactor.presenter = presenter
     }
     
-    func testRequestSetupViewWithHappyFlow() {
+    func testRefreshDataWithHappyFlow() {
         self.presenter.presentSetupViewCalled = false
         self.presenter.presentLoadingCalled = false
         self.presenter.presentCurrencyCalled = false
         self.presenter.presentExchangeRatesCalled = false
         let expectation = self.expectation(description: #function)
         httpClient.showError = false
-        interactor.requestSetupView(request: .init())
+        interactor.refreshData(request: .init())
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.presenter.presentSetupViewCalled)
             XCTAssert(self.presenter.presentLoadingCalled)
             XCTAssert(self.presenter.presentCurrencyCalled)
             XCTAssert(self.presenter.presentCurrencyCalled)
@@ -97,16 +96,14 @@ class CurrencyConversionInteractorTests: XCTestCase {
         }
     }
     
-    func testRequestSetupViewWithCurrencyListFail() {
-        self.presenter.presentSetupViewCalled = false
+    func testRefreshDataWithUnHappyFlow() {
+        let expectation = self.expectation(description: #function)
         self.presenter.presentLoadingCalled = false
         self.presenter.presentCurrencyCalled = false
         self.presenter.presentExchangeRatesCalled = false
-        let expectation = self.expectation(description: #function)
         httpClient.showError = true
-        interactor.requestSetupView(request: .init())
+        interactor.refreshData(request: .init())
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.presenter.presentSetupViewCalled)
             XCTAssert(self.presenter.presentLoadingCalled)
             XCTAssertFalse(self.presenter.presentCurrencyListCalled)
             XCTAssertFalse(self.presenter.presentExchangeRatesCalled)
@@ -116,6 +113,11 @@ class CurrencyConversionInteractorTests: XCTestCase {
         self.waitForExpectations(timeout: 2) { _ in
             
         }
+    }
+    
+    func testSetupView() {
+        interactor.requestSetupView(request: .init())
+        XCTAssert(self.presenter.presentSetupViewCalled)
     }
     
     func testGetQuoteListWithError() {
