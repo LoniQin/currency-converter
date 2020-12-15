@@ -25,7 +25,7 @@ class CurrencyConversionViewControllerTests: XCTestCase {
         }
         
         var updateAmountCalled = false
-        var amount: String = ""
+        var amount = ""
         func updateAmount(request: CurrencyConvertion.UpdateAmountRequest) {
             updateAmountCalled = true
             self.amount = request.amount
@@ -76,15 +76,13 @@ class CurrencyConversionViewControllerTests: XCTestCase {
     }
     
     func testChooseCurrency() {
-        let expectation = self.expectation(description: "Picker View ")
-        viewController.pickerView(viewController.pickerView, didSelectRow: 3, inComponent: 0)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.interactor.updateCurrencyCalled)
-            XCTAssertEqual(self.interactor.selectedIndex, 3)
-            expectation.fulfill()
-        }
-        self.waitForExpectations(timeout: 2) { _ in
-            
+        makeExpextation { expectation in
+            viewController.pickerView(viewController.pickerView, didSelectRow: 3, inComponent: 0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                XCTAssert(self.interactor.updateCurrencyCalled)
+                XCTAssertEqual(self.interactor.selectedIndex, 3)
+                expectation.fulfill()
+            }
         }
     }
     

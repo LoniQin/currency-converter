@@ -47,6 +47,7 @@
 		F04BD8F5258785420042819A /* CurrencyConversionRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BD8F4258785420042819A /* CurrencyConversionRouterTests.swift */; };
 		F0A56B5A25879B000078485C /* ExchangeRatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A56B5825879B000078485C /* ExchangeRatesCell.swift */; };
 		F0A56B5B25879B000078485C /* ExchangeRatesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A56B5925879B000078485C /* ExchangeRatesCell.xib */; };
+		F0A56B632589241E0078485C /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A56B622589241E0078485C /* XCTestCaseExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		F04BD8F4258785420042819A /* CurrencyConversionRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionRouterTests.swift; sourceTree = "<group>"; };
 		F0A56B5825879B000078485C /* ExchangeRatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCell.swift; sourceTree = "<group>"; };
 		F0A56B5925879B000078485C /* ExchangeRatesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeRatesCell.xib; sourceTree = "<group>"; };
+		F0A56B622589241E0078485C /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 			children = (
 				F04BD8E1258775510042819A /* MockHttpClient.swift */,
 				F04BD8E72587758E0042819A /* EmptyURLSessionTask.swift */,
+				F0A56B622589241E0078485C /* XCTestCaseExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				F04BD8BA25875F0E0042819A /* CurrencyRepositoryTests.swift in Sources */,
 				F04BD8E82587758E0042819A /* EmptyURLSessionTask.swift in Sources */,
 				F04BD7CA2583CA1F0042819A /* CurrencyConverterTests.swift in Sources */,
+				F0A56B632589241E0078485C /* XCTestCaseExtension.swift in Sources */,
 				F04BD8D525876BED0042819A /* CurrencyConversionViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

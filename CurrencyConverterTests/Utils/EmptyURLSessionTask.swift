@@ -8,15 +8,9 @@ import FoundationLib
 import Foundation
 class EmptyURLSessionTask: URLSessionTaskProtocol {
     
-    func resume() {
-        
-    }
+    func resume() {}
     
-    func cancel() {
-        
-    }
+    func cancel() {}
     
-    func suspend() {
-        
-    }
+    func suspend() {}
 }

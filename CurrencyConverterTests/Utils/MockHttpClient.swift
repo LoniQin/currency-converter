@@ -11,8 +11,8 @@ class MockHttpClient: Networking {
     var showError = false
     
     var fileMapper = [
-        "/list":"currencyList",
-        "/live":"quoteList"
+        "/list": "currencyList",
+        "/live": "quoteList"
     ]
     
     func send<T>(_ request: RequestConvertable, completion: @escaping (Result<T, Error>) -> Void) -> URLSessionTaskProtocol? where T : ResponseConvertable {

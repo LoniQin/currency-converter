@@ -76,42 +76,37 @@ class CurrencyConversionInteractorTests: XCTestCase {
     }
     
     func testRefreshDataWithHappyFlow() {
-        self.presenter.presentSetupViewCalled = false
-        self.presenter.presentLoadingCalled = false
-        self.presenter.presentCurrencyCalled = false
-        self.presenter.presentExchangeRatesCalled = false
-        let expectation = self.expectation(description: #function)
-        httpClient.showError = false
-        interactor.refreshData(request: .init())
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.presenter.presentLoadingCalled)
-            XCTAssert(self.presenter.presentCurrencyCalled)
-            XCTAssert(self.presenter.presentCurrencyCalled)
-            XCTAssert(self.presenter.presentExchangeRatesCalled)
-            expectation.fulfill()
-        }
-        
-        self.waitForExpectations(timeout: 2) { _ in
-            
+        makeExpextation { expectation in
+            self.presenter.presentSetupViewCalled = false
+            self.presenter.presentLoadingCalled = false
+            self.presenter.presentCurrencyCalled = false
+            self.presenter.presentExchangeRatesCalled = false
+            httpClient.showError = false
+            interactor.refreshData(request: .init())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                XCTAssert(self.presenter.presentLoadingCalled)
+                XCTAssert(self.presenter.presentCurrencyCalled)
+                XCTAssert(self.presenter.presentCurrencyCalled)
+                XCTAssert(self.presenter.presentExchangeRatesCalled)
+                expectation.fulfill()
+            }
         }
     }
     
     func testRefreshDataWithUnHappyFlow() {
-        let expectation = self.expectation(description: #function)
-        self.presenter.presentLoadingCalled = false
-        self.presenter.presentCurrencyCalled = false
-        self.presenter.presentExchangeRatesCalled = false
-        httpClient.showError = true
-        interactor.refreshData(request: .init())
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.presenter.presentLoadingCalled)
-            XCTAssertFalse(self.presenter.presentCurrencyListCalled)
-            XCTAssertFalse(self.presenter.presentExchangeRatesCalled)
-            XCTAssert(self.presenter.presentErrorCalled)
-            expectation.fulfill()
-        }
-        self.waitForExpectations(timeout: 2) { _ in
-            
+        makeExpextation { expectation in
+            self.presenter.presentLoadingCalled = false
+            self.presenter.presentCurrencyCalled = false
+            self.presenter.presentExchangeRatesCalled = false
+            httpClient.showError = true
+            interactor.refreshData(request: .init())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                XCTAssert(self.presenter.presentLoadingCalled)
+                XCTAssertFalse(self.presenter.presentCurrencyListCalled)
+                XCTAssertFalse(self.presenter.presentExchangeRatesCalled)
+                XCTAssert(self.presenter.presentErrorCalled)
+                expectation.fulfill()
+            }
         }
     }
     
@@ -121,22 +116,20 @@ class CurrencyConversionInteractorTests: XCTestCase {
     }
     
     func testGetQuoteListWithError() {
-        self.presenter.presentSetupViewCalled = false
-        self.presenter.presentLoadingCalled = false
-        self.presenter.presentCurrencyCalled = false
-        self.presenter.presentExchangeRatesCalled = false
-        let expectation = self.expectation(description: #function)
-        httpClient.showError = true
-        interactor.getQuoteList {
-            
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssert(self.presenter.presentLoadingCalled)
-            XCTAssert(self.presenter.presentErrorCalled)
-            expectation.fulfill()
-        }
-        self.waitForExpectations(timeout: 2) { _ in
-            
+        makeExpextation { expectation in
+            self.presenter.presentSetupViewCalled = false
+            self.presenter.presentLoadingCalled = false
+            self.presenter.presentCurrencyCalled = false
+            self.presenter.presentExchangeRatesCalled = false
+            httpClient.showError = true
+            interactor.getQuoteList {
+                
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                XCTAssert(self.presenter.presentLoadingCalled)
+                XCTAssert(self.presenter.presentErrorCalled)
+                expectation.fulfill()
+            }
         }
     }
     
@@ -153,59 +146,54 @@ class CurrencyConversionInteractorTests: XCTestCase {
     }
     
     func testUpdateCurrency() {
-        presenter.presentCurrencyCalled = false
-        presenter.presentLoadingCalled = false
-        presenter.presentExchangeRatesCalled = false
-        let expectation = self.expectation(description: #function)
-        presenter.presentLoadingCalled = false
-        httpClient.showError = false
-        interactor.currencyList = CurrencyList(["HRK" : "Croatian Kuna",
-                                               "HUF" : "Hungarian Forint",
-                                               "CDF" : "Congolese Franc",
-                                               "ILS" : "Israeli New Sheqel",
-                                               "NGN" : "Nigerian Naira",
-                                               "GYD" : "Guyanaese Dollar",
-                                               "BYR" : "Belarusian Ruble",
-                                               "BHD" : "Bahraini Dinar",
-                                               "SZL" : "Swazi Lilangeni",
-                                               "INR" : "Indian Rupee",
-                                               "SDG" : "Sudanese Pound",
-                                               "PEN" : "Peruvian Nuevo Sol",
-                                               "EUR" : "Euro",
-                                               "QAR" : "Qatari Rial",
-                                               "PGK" : "Papua New Guinean Kina",
-                                               "LRD" : "Liberian Dollar",
-                                               "ISK" : "Icelandic Króna",
-                                               "SYP" : "Syrian Pound",
-                                               "TRY" : "Turkish Lira"])
-        interactor.updateCurrency(request: .init(selectedIndex: 1))
-        XCTAssertEqual(interactor.selectedIndex, 1)
-        XCTAssertTrue(presenter.presentLoadingCalled)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(self.presenter.presentCurrencyCalled)
-            XCTAssertTrue(self.presenter.presentExchangeRatesCalled)
-            expectation.fulfill()
-        }
-        self.waitForExpectations(timeout: 2) { _ in
+        makeExpextation { expectation in
+            presenter.presentCurrencyCalled = false
+            presenter.presentLoadingCalled = false
+            presenter.presentExchangeRatesCalled = false
+            presenter.presentLoadingCalled = false
+            httpClient.showError = false
+            interactor.currencyList = CurrencyList(["HRK" : "Croatian Kuna",
+                                                   "HUF" : "Hungarian Forint",
+                                                   "CDF" : "Congolese Franc",
+                                                   "ILS" : "Israeli New Sheqel",
+                                                   "NGN" : "Nigerian Naira",
+                                                   "GYD" : "Guyanaese Dollar",
+                                                   "BYR" : "Belarusian Ruble",
+                                                   "BHD" : "Bahraini Dinar",
+                                                   "SZL" : "Swazi Lilangeni",
+                                                   "INR" : "Indian Rupee",
+                                                   "SDG" : "Sudanese Pound",
+                                                   "PEN" : "Peruvian Nuevo Sol",
+                                                   "EUR" : "Euro",
+                                                   "QAR" : "Qatari Rial",
+                                                   "PGK" : "Papua New Guinean Kina",
+                                                   "LRD" : "Liberian Dollar",
+                                                   "ISK" : "Icelandic Króna",
+                                                   "SYP" : "Syrian Pound",
+                                                   "TRY" : "Turkish Lira"])
+            interactor.updateCurrency(request: .init(selectedIndex: 1))
+            XCTAssertEqual(interactor.selectedIndex, 1)
+            XCTAssertTrue(presenter.presentLoadingCalled)
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                XCTAssertTrue(self.presenter.presentCurrencyCalled)
+                XCTAssertTrue(self.presenter.presentExchangeRatesCalled)
+                expectation.fulfill()
+            }
         }
     }
     
     func testRequestExchangeRates() {
-        presenter.presentExchangeRatesCalled = true
-        let expectation = self.expectation(description: #function)
-        httpClient.showError = false
-        interactor.getCurrencyListAndExchangeRates { [weak self] in
-            self?.interactor.requestExchangeRates(request: .init())
-            XCTAssertEqual(self?.presenter.presentExchangeRatesCalled, true)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            expectation.fulfill()
-        }
-        
-        self.waitForExpectations(timeout: 2) { _ in
-            
+        makeExpextation { expectation in
+            presenter.presentExchangeRatesCalled = true
+            httpClient.showError = false
+            interactor.getCurrencyListAndExchangeRates { [weak self] in
+                self?.interactor.requestExchangeRates(request: .init())
+                XCTAssertEqual(self?.presenter.presentExchangeRatesCalled, true)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                expectation.fulfill()
+            }
         }
     }
   
