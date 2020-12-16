@@ -1,2 +1,2 @@
 # currency-converter
-![1](picture_1.png)
+![ ](https://raw.githubusercontent.com/LoniQin/currency-converter/main/picture_1.png)
