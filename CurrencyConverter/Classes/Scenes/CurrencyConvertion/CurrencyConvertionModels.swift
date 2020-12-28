@@ -21,6 +21,8 @@ enum CurrencyConvertion {
         
         let amountHint: String
         
+        let refreshImage: UIImage?
+        
     }
     
     //MARK: Refresh data

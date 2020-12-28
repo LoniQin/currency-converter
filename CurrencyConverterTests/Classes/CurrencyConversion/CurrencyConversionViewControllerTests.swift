@@ -87,10 +87,12 @@ class CurrencyConversionViewControllerTests: XCTestCase {
     }
     
     func testDisplaySetUpView() {
-        let viewModel = CurrencyConvertion.SetupViewViewModel(title: "Currency conversion", amountHint: "Please input amount..")
+        let image = UIImage(named: "refresh")
+        let viewModel = CurrencyConvertion.SetupViewViewModel(title: "Currency conversion", amountHint: "Please input amount..", refreshImage: image)
         viewController.displaySetupView(viewModel: viewModel)
         XCTAssertEqual(viewController.title, viewModel.title)
         XCTAssertEqual(viewController.amountField.placeholder, viewModel.amountHint)
+        XCTAssertEqual(viewController.navigationItem.rightBarButtonItem?.image, viewModel.refreshImage)
     }
     
     func testDisplayLoading() {

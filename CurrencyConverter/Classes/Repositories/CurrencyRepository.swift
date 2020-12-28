@@ -51,7 +51,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
             method: .get,
             query: HTTP.query(access_key: accessKey())
         )
-        _ = get(request: request) { [weak self] (result) in
+        get(request: request) { [weak self] (result) in
             do {
                 let diciontary = try result.get()
                 let currencies: [String: String] = try diciontary.get("currencies")
@@ -60,7 +60,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
                 try self?.storage.save()
                 completion(.success(currencyList))
             } catch let error {
-                completion(.failure(.unknownError(error)))
+                completion(.failure(.init(error)))
             }
         }
     }
@@ -78,7 +78,7 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
             method: .get,
             query: HTTP.query(access_key: accessKey())
         )
-        _ = get(request: request) { [weak self] (result) in
+        get(request: request) { [weak self] (result) in
             do {
                 let diciontary = try result.get()
                 let source: String = try diciontary.get("source")
@@ -88,11 +88,12 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
                 try self?.storage.save()
                 completion(.success(quoteList))
             } catch let error {
-                completion(.failure(.unknownError(error)))
+                completion(.failure(.init(error)))
             }
         }
     }
     
+    @discardableResult
     func get(
         request: RequestConvertable,
         completion: @escaping (Result<[String: Any], NetworkingError>) -> Void
@@ -106,10 +107,10 @@ class CurrencyRepository: CurrencyRepositoryProtocol {
                 } else {
                     let error: [String: Any] = try dictionary.get("error")
                     let serverError = try ServerError(code: error.get("code"), info: error.get("info"))
-                    completion(.failure(.serverError(serverError)))
+                    completion(.failure(.init(serverError)))
                 }
             } catch let error {
-                completion(.failure(.unknownError(error)))
+                completion(.failure(.init(error)))
             }
         }
     }

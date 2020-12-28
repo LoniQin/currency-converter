@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ServerError {
+struct ServerError: Error {
     
     let code: Int
     

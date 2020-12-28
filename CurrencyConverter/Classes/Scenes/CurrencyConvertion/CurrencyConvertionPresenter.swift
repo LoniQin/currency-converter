@@ -44,7 +44,8 @@ class CurrencyConvertionPresenter: CurrencyConvertionPresentationLogic {
         viewController?.displaySetupView(
             viewModel: .init(
                 title: configuration.stringProvider.currencyConvertionTitle(),
-                amountHint: configuration.stringProvider.currencyConvertionInputAmountHint()
+                amountHint: configuration.stringProvider.currencyConvertionInputAmountHint(),
+                refreshImage: UIImage(named: "refresh")
             )
         )
     }

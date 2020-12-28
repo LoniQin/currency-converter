@@ -8,6 +8,7 @@
 import UIKit
 
 class CurrencyConvertionConfigurator {
+    
     static func makeViewController(configuration: CurrencyConvertionConfiguration) -> UIViewController {
         let viewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "currency_convertion") as! CurrencyConvertionViewController
         let repository = CurrencyRepository(httpClient: configuration.httpClient, storage: configuration.storage)
@@ -21,4 +22,5 @@ class CurrencyConvertionConfigurator {
         router.viewController = viewController
         return viewController
     }
+    
 }

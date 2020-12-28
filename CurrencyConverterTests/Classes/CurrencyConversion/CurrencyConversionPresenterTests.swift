@@ -127,9 +127,10 @@ class CurrencyConversionPresenterTests: XCTestCase {
                 exchangeRates: [
                     ExchangeRate(amount: 1.2, currency: "USD"),
                     ExchangeRate(amount: 1.11993, currency: "GBP"),
+                    ExchangeRate(amount: 1.11995, currency: "GBP"),
         ]))
         XCTAssert(viewController.displayExchangeRatesCalled)
-        XCTAssertEqual(viewController.exchangeRates, ["1.2000 USD", "1.1199 GBP"])
+        XCTAssertEqual(viewController.exchangeRates, ["1.2000 USD", "1.1199 GBP", "1.1200 GBP"])
     }
     
 }

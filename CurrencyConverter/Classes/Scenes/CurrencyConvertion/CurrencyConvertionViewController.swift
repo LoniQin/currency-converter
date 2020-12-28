@@ -38,6 +38,8 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         static let pickerViewHiddenConstant: CGFloat = 0
         
         static let tableViewEstimatedRowHeight: CGFloat = 50
+        
+        static let cellName = "ExchangeRatesCell"
     }
     
     var interactor: CurrencyConvertionBusinessLogic?
@@ -87,7 +89,12 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
     }
     
     func displaySetupView(viewModel: CurrencyConvertion.SetupViewViewModel) {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "refresh"), style: .plain, target: self, action: #selector(refresh))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: viewModel.refreshImage,
+            style: .plain,
+            target: self,
+            action: #selector(refresh)
+        )
         title = viewModel.title
         view.backgroundColor = UIColor.white
         pickerView.backgroundColor = UIColor.white
@@ -101,7 +108,7 @@ class CurrencyConvertionViewController: UIViewController, CurrencyConvertionDisp
         pickerView.delegate = self
         tableView.estimatedRowHeight = Constants.tableViewEstimatedRowHeight
         tableView.register(
-            UINib(nibName: "ExchangeRatesCell", bundle: nil),
+            UINib(nibName: Constants.cellName, bundle: nil),
             forCellReuseIdentifier: Constants.reuseIdentifier
         )
         amountField.addTarget(self, action: #selector(updateAmount(textField:)), for: .allEditingEvents)

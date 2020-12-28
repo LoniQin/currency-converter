@@ -49,6 +49,7 @@
 		F0A56B5A25879B000078485C /* ExchangeRatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A56B5825879B000078485C /* ExchangeRatesCell.swift */; };
 		F0A56B5B25879B000078485C /* ExchangeRatesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A56B5925879B000078485C /* ExchangeRatesCell.xib */; };
 		F0A56B632589241E0078485C /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A56B622589241E0078485C /* XCTestCaseExtension.swift */; };
+		F0DB5CE6259A23650088B09D /* NetworkingErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB5CE5259A23650088B09D /* NetworkingErrorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		F0A56B5825879B000078485C /* ExchangeRatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCell.swift; sourceTree = "<group>"; };
 		F0A56B5925879B000078485C /* ExchangeRatesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeRatesCell.xib; sourceTree = "<group>"; };
 		F0A56B622589241E0078485C /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
+		F0DB5CE5259A23650088B09D /* NetworkingErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingErrorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				F04BD8A625875B800042819A /* StringProvidableTests.swift */,
 				F04BD8B125875CCA0042819A /* ExtensionTests.swift */,
 				F04BD8B925875F0E0042819A /* CurrencyRepositoryTests.swift */,
+				F0DB5CE5259A23650088B09D /* NetworkingErrorTests.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				F04BD8F5258785420042819A /* CurrencyConversionRouterTests.swift in Sources */,
 				F04BD8BA25875F0E0042819A /* CurrencyRepositoryTests.swift in Sources */,
 				F04BD8E82587758E0042819A /* EmptyURLSessionTask.swift in Sources */,
+				F0DB5CE6259A23650088B09D /* NetworkingErrorTests.swift in Sources */,
 				F04BD7CA2583CA1F0042819A /* CurrencyConverterTests.swift in Sources */,
 				F0A56B632589241E0078485C /* XCTestCaseExtension.swift in Sources */,
 				F04BD8D525876BED0042819A /* CurrencyConversionViewControllerTests.swift in Sources */,
