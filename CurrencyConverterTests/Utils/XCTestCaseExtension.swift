@@ -16,7 +16,7 @@ extension XCTestCase {
         block(expectaion)
         self.waitForExpectations(timeout: timeout) { error in
             if let error = error {
-                XCTAssertThrowsError(error)
+                XCTFail(error.localizedDescription)
             }
         }
     }

@@ -68,22 +68,21 @@ class CurrencyRepositoryTests: XCTestCase {
                     XCTAssert(currencyList.quotes.count == data.quotes.count)
                     successExpectation.fulfill()
                 } catch let error {
-                    XCTAssertThrowsError(error)
+                    XCTFail(error.localizedDescription)
                 }
             case .failure(let error):
-                XCTAssertThrowsError(error)
+                XCTFail(error.localizedDescription)
             }
         }
         httpClient.showError = true
         repository.getQuoteList { result in
             switch result {
             case .success:
-                XCTAssertThrowsError("Failure")
+                XCTFail("Failure")
             case .failure:
                 failureExpectation.fulfill()
             }
         }
-        
         waitForExpectations(timeout: 1.0) { _ in
            
         }
